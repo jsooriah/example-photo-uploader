@@ -1,0 +1,8 @@
+<div id="multipleimages">
+	<div class="thumb">
+		<h3><%=photo.title%></h3>
+		<small><%=photo.location%></small>
+		<br/>
+		<%=link_to image_tag(photo.image_url(:square)), photo_path(photo)%>
+	</div>
+</div>

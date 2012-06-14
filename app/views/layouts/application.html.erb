@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>example-photo-uploader</title>
+		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="initial-scale=1.0">
+		<%= yield :head %>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="container">
+
+			<div id="header">
+				<div id="action_links">
+					<% if user_signed_in? %>
+					Hello, <%= current_user.name %> | <%= link_to('Signout', destroy_user_session_path, :method => 'delete') %>
+					<% else %>
+					<%= link_to image_tag('https://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l-sm.png', alt: 'Sign in with Twitter'), user_omniauth_authorize_path(:twitter), {:id => 'twitter_login'} %>
+					<% end %>
+				</div>
+				<br/>
+				<h1> <%= link_to("PHOTO UPLOADER", root_path)%></h1>
+				<%= form_tag photos_path, :method => :get, :id=>"search" do %>
+				<%= text_field_tag :search, params[:search], :html=>{:class=>"textfield"}  %>
+				<%= submit_tag "Search Near", :name => nil %>
+				<br/>
+				<small> ex: London, Big Ben, Colombo </small>
+				<% end %>
+				<hr class="seperator" />
+				<%=link_to "Home", root_path%> | <%=link_to "Photos", photos_path%>
+			</div>
+
+			<div id="content">
+				<% flash.each do |name, msg| %>
+						<div class="flash <%=name%>">
+							
+							<%= msg %>
+						</div>
+						<% end %>
+				<%= yield %>
+			</div>
+
+			<div id="footer">
+
+				<hr class="seperator" />
+				&copy; Randika Rathugamage 2012.
+			</div>
+		</div>
+	</body>
+</html>

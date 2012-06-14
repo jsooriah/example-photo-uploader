@@ -1,0 +1,17 @@
+<h1>All photos</h1>
+<div id="new-upload">
+<%= link_to 'Upload', new_photo_path, :class=>"button orange" %>
+</div>
+
+
+
+<ul>
+<% @photos.each do |photo|%>
+<%= render :partial=>"/photos/thumb", :locals => {:photo=>photo}%>
+<% end%>
+</ul>
+
+
+<div style="clear: both"></div>
+<br />
+

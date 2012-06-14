@@ -1,0 +1,25 @@
+<h1><%=@photo.title%></h1>
+
+<div id="imageHolder">
+<%=image_tag(@photo.image_url(:medium))%>
+</div>
+
+
+
+<div id="sidebar">
+<% if @photo.mapped?%>
+<span> <%= image_tag "http://maps.google.com/maps/api/staticmap?size=200x200&sensor=false&zoom=16&markers=#{@photo.lat}%2C#{@photo.lon}" %> </span>
+<br />
+<strong><%=@photo.location%></strong><br />
+lat/lon: <%=@photo.lat%>/<%=@photo.lon%>
+<%end%>
+<br />
+<br />
+<div id="photo-links">
+<%= link_to 'Edit photo', edit_photo_path(@photo), :class=>"button orange" %>
+</div>
+</div>
+
+<div style="clear: both"></div>
+
+
